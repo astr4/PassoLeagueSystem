@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
+
 namespace PassoLeagueSystem
 {
     class Program
@@ -17,10 +17,6 @@ namespace PassoLeagueSystem
         static void Main(string[] args)
         {
             Matches = new List<Match>();
-            string customerUsernameList =
-                @"C:\\Users\\astr4moon\\Desktop\\PassoLeagueSystem\\PassoLeagueSystem\\customerUsernameList.txt";
-            string customerPasswordList =
-                @"C:\\Users\\astr4moon\\Desktop\\PassoLeagueSystem\\PassoLeagueSystem\\customerPasswordList.txt";
             string matchesFile = @"C:\\Users\\astr4moon\\Desktop\\PassoLeagueSystem\\PassoLeagueSystem\\Matches.txt";
             string ticketsFile = @"C:\\Users\\astr4moon\\Desktop\\PassoLeagueSystem\\PassoLeagueSystem\\Tickets.txt";
             string[] matchesFiles =
@@ -32,19 +28,20 @@ namespace PassoLeagueSystem
             {
                 Matches.Add(new Match());
             }
+
             List<Customer> customers = new List<Customer>();
             List<Admin> admins = new List<Admin>();
-            
+
             Admin admin = new Admin("admin", 12345);
             Admin admin2 = new Admin("Arda", 142536);
-            
-            Customer cust = new Customer(12345, "AliT", 123456, "Ali", "Tomar", 28);
-            Customer cust2 = new Customer(12345, "KemalD", 123456, "Kemal", "Demirci", 32);
-            Customer cust3 = new Customer(12345, "NeclaS", 123456, "Necla", "Semen", 45);
-            Customer cust4 = new Customer(12345, "CemU", 123456, "Cem", "Uzay", 25);
-            Customer cust5 = new Customer(12345, "AyberkO", 123456, "Ayberk", "Ortancalar", 23);
-            Customer cust6 = new Customer(12345, "SilaT", 123456, "Sila", "Tekcan", 23);
-            
+
+            Customer cust = new Customer(1231, "AliT", 123456, "Ali", "Tomar", 28);
+            Customer cust2 = new Customer(1232, "KemalD", 123456, "Kemal", "Demirci", 32);
+            Customer cust3 = new Customer(1233, "NeclaS", 123456, "Necla", "Semen", 45);
+            Customer cust4 = new Customer(1234, "CemU", 123456, "Cem", "Uzay", 25);
+            Customer cust5 = new Customer(1235, "AyberkO", 123456, "Ayberk", "Ortancalar", 23);
+            Customer cust6 = new Customer(1236, "SilaT", 123456, "Sila", "Tekcan", 23);
+
             admins.Add(admin);
             admins.Add(admin2);
 
@@ -54,9 +51,9 @@ namespace PassoLeagueSystem
             customers.Add(cust4);
             customers.Add(cust5);
             customers.Add(cust6);
-            
+
             LoadMatchesAndTickets();
-            
+
             while (true)
             {
                 Console.WriteLine("Welcome to Passo League System");
@@ -79,16 +76,19 @@ namespace PassoLeagueSystem
                             {
                                 Console.WriteLine("Please Enter your password: ");
                                 int password = Convert.ToInt32(Console.ReadLine());
-                               
-                                if (customer.Password == password) {
+
+                                if (customer.Password == password)
+                                {
                                     isUserVerified = true;
                                 }
                             }
                         }
+
                         if (!isUserVerified)
                         {
                             Console.WriteLine("Wrong Username or Password!");
                         }
+
                         while (isUserVerified)
                         {
                             Console.WriteLine("Press 0 for Log-out");
@@ -112,6 +112,7 @@ namespace PassoLeagueSystem
                                     break;
                             }
                         }
+
                         break;
                     case 2:
                         bool isAdminVerified = false;
@@ -123,12 +124,14 @@ namespace PassoLeagueSystem
                             {
                                 Console.WriteLine("Please Enter your password: ");
                                 int password = Convert.ToInt32(Console.ReadLine());
-                               
-                                if (admn.Password == password) {
+
+                                if (admn.Password == password)
+                                {
                                     isAdminVerified = true;
                                 }
                             }
                         }
+
                         if (!isAdminVerified)
                         {
                             Console.WriteLine("Wrong Username or Password!");
@@ -153,7 +156,6 @@ namespace PassoLeagueSystem
                                     admin.addMatch();
                                     break;
                                 case 2:
-                                    LoadMatchesAndTickets();
                                     foreach (var match in Matches)
                                     {
                                         match.Display();
@@ -164,7 +166,6 @@ namespace PassoLeagueSystem
                                     admin.removeMatch(Convert.ToInt32(Console.ReadLine()));
                                     break;
                                 case 3:
-                                    LoadMatchesAndTickets();
                                     foreach (var match in Matches)
                                     {
                                         match.Display();
@@ -210,6 +211,7 @@ namespace PassoLeagueSystem
                                     break;
                             }
                         }
+
                         break;
                     default:
                         Console.WriteLine("Wrong input!");
@@ -217,6 +219,7 @@ namespace PassoLeagueSystem
                 }
             }
         }
+
         public static void LoadMatchesAndTickets()
         {
             string[] matchesFile =

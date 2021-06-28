@@ -225,44 +225,9 @@ namespace PassoLeagueSystem
                                 sw.WriteLine();
                                 sw.Write(tickets[j]);
                             }
-                                
                         }
                     }
-                    foreach (var match in Program.Matches)
-                    {
-                        if (matches[matchLine] == null)
-                        {
-                            matchesFile = matchesFile + 7;
-                        }
-                        match.Id = Convert.ToInt32(matches[matchLine]);
-                        matchLine++;
-                        match.Team1 = matches[matchLine];
-                        matchLine++;
-                        match.Team2 = matches[matchLine];
-                        matchLine++;
-                        match.StartDate = Convert.ToDateTime(matches[matchLine]);
-                        matchLine++;
-                        match.StartTime = Convert.ToDateTime(matches[matchLine]);
-                        matchLine++;
-                        match.Place = matches[matchLine];
-                        matchLine++;
-                        match.HallCapacity = Convert.ToInt32(matches[matchLine]);
-                        matchLine++;
-                        
-                        match.Ticket = new Ticket();
-                        if (tickets[ticketLine] == null)
-                        {
-                            ticketLine = ticketLine + 4;
-                        }
-                        match.Ticket.TicketId = Convert.ToInt32(tickets[ticketLine]);
-                        ticketLine++;
-                        match.Ticket.MatchId = Convert.ToInt32(tickets[ticketLine]);
-                        ticketLine++;
-                        match.Ticket.Status = tickets[ticketLine];
-                        ticketLine++;
-                        match.Ticket.Price = Convert.ToInt32(tickets[ticketLine]);
-                        ticketLine++;
-                    }
+                    Program.LoadMatchesAndTickets();
                     break;
                 }
             }
