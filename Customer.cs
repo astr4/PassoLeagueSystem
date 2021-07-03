@@ -3,20 +3,17 @@ using System.IO;
 
 namespace PassoLeagueSystem
 {
-    public class Customer
+    public class Customer : User
     {
         private int customerID;
-        private string userName;
-        private int password;
         private string customerName;
         private string customerSurName;
         private int customerAge;
-
-        public Customer(int customerId, string userName, int password, string customerName, string customerSurName, int customerAge)
+        private Ticket ticket;
+        
+        public Customer(int customerId, string userName, int password, string customerName, string customerSurName, int customerAge) : base(userName,password)
         {
             customerID = customerId;
-            this.userName = userName;
-            this.password = password;
             this.customerName = customerName;
             this.customerSurName = customerSurName;
             this.customerAge = customerAge;
@@ -27,19 +24,6 @@ namespace PassoLeagueSystem
             get => customerID;
             set => customerID = value;
         }
-
-        public string UserName
-        {
-            get => userName;
-            set => userName = value;
-        }
-
-        public int Password
-        {
-            get => password;
-            set => password = value;
-        }
-
         public string CustomerName
         {
             get => customerName;
@@ -57,6 +41,11 @@ namespace PassoLeagueSystem
             get => customerAge;
             set => customerAge = value;
         }
+        public Ticket Ticket
+        {
+            get => ticket;
+            set => ticket = value;
+        }
 
         public void displayIncoming()
         {
@@ -69,7 +58,7 @@ namespace PassoLeagueSystem
                 }
             }
         }
-        public void searchFromIDAndDisplayTicket(int ID)
+        public override void searchFromIDAndDisplayTicket(int ID)
         {
             foreach (var match in Program.Matches)
             {
@@ -98,6 +87,8 @@ namespace PassoLeagueSystem
         }
         public void buyTicket(Match match)
         {
+            Ticket = (match.Ticket);
+            
             string customerLogs = @"C:\\Users\\astr4moon\\Desktop\\PassoLeagueSystem\\PassoLeagueSystem\\customerLogs.txt";
             using (StreamWriter sw = File.AppendText(customerLogs))
             {

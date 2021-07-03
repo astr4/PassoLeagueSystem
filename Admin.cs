@@ -3,30 +3,12 @@ using System.IO;
 
 namespace PassoLeagueSystem
 {
-    public class Admin
+    public class Admin : User
     {
-        private string userName;
-        private int password;
-
-        public Admin(string userName, int password)
+        public Admin(string userName, int password) : base(userName,password)
         {
-            this.userName = userName;
-            this.password = password;
         }
-
-        public string UserName
-        {
-            get => userName;
-            set => userName = value;
-        }
-
-        public int Password
-        {
-            get => password;
-            set => password = value;
-        }
-
-        public void searchFromIDAndDisplayTicket(int ID)
+        public override void searchFromIDAndDisplayTicket(int ID)
         {
             foreach (var match in Program.Matches)
             {
@@ -180,7 +162,6 @@ namespace PassoLeagueSystem
                     }
                     int ticketLine = 0;
                     int matchLine = 0;
-                    
                     using (StreamWriter sw = new StreamWriter(matchesFile, false)) 
                     {
                         for (int j = 0; j < matches.Length; j++)
